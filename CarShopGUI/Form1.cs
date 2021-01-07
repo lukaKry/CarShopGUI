@@ -24,8 +24,16 @@ namespace CarShopGUI
 
         private void btn_create_car_Click(object sender, EventArgs e)
         {
-            Car c = new Car(txt_make.Text, txt_model.Text, decimal.Parse(txt_price.Text), txt_color.Text);
-            myStore.CarList.Add(c);
+            try
+            {
+                Car c = new Car(txt_make.Text, txt_model.Text, decimal.Parse(txt_price.Text), txt_color.Text);
+                myStore.CarList.Add(c);
+            }
+            catch
+            {
+                MessageBox.Show("Please, input data before adding any item. Price must be an integer.");    
+            }
+            
             carInventoryBindingSource.ResetBindings(false);
             txt_color.Clear();
             txt_make.Clear();
@@ -80,6 +88,7 @@ namespace CarShopGUI
         private void btn_clear_Click(object sender, EventArgs e)
         {
             cartBindingSource.ResetBindings(false);
+            lbl_total_cost.Text = "Total cost: $";
 
         }
     }
